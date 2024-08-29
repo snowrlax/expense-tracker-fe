@@ -5,12 +5,14 @@ interface Props {
   id: number;
   description: string;
   amount: number;
+  createdAt: string;
   type: string;
   mutation: UseMutationResult<any, Error, number, unknown>;
 }
 
 const TransactionList = (props: Props) => {
-  const { description, amount, type, id, mutation } = props;
+  const { description, amount, type, id, mutation, createdAt } = props;
+  const date = new Date(createdAt);
   return (
     <div
       className={`relative bg-white rounded-md p-4 border-l-8 shadow-md my-4 flex justify-between items-center ${
@@ -26,6 +28,9 @@ const TransactionList = (props: Props) => {
             Rs {type === "EXPENSE" ? "-" : "+"}
             {amount}
           </p>
+        </div>
+        <div className="pt-2 text-xs text-slate-400 font-semibold">
+          <p>Date: {date.toLocaleDateString()}</p>
         </div>
       </div>
       <div
